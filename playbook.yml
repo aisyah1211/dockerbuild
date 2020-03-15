@@ -12,7 +12,15 @@
         state: present
       when:
       - ansible_distribution == "Ubuntu"
-    - name: pull image 
+    - name: stop container 
+      docker_container:
+        name: container_by_jenkins
+        state: absent
+    - name: delete image
+      docker_image: 
+        name: aisyah1211/apache-jenkins:latest
+        state: absent
+    - name: pull image
       docker_image:
         name: aisyah1211/apache-jenkins:latest
         pull: yes
